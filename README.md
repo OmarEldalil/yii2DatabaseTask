@@ -1,4 +1,4 @@
-#Installation steps
+<strong>Installation steps</strong>
 - git clone https://github.com/OmarEldalil/yii2DatabaseTask
 - composer install
 - create a database named interview
