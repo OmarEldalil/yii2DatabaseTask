@@ -47,7 +47,8 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'GET /hi'=> 'myController/index'
+                'GET /'=> 'site/index',
+                'GET /category/storecategory'=> 'category/storecategory'
             ],
         ],*/
     ],

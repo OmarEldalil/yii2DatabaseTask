@@ -9,7 +9,7 @@ $this->title = 'My Yii Application';
         <div v-if="!categories.length">
             <h2 class="text-censter">It seems like you don't have categories in your database</h2>
             <div class="text-center">
-                <a href="http://localhost:8080/index.php?r=site/seed" class="btn btn-primary">Seed the database</a>
+                <a href="http://localhost:8080/index.php?r=category/seed" class="btn btn-primary">Seed the database</a>
             </div>
         </div>
         <div class="form-group" v-for="(category,index) in categories">
@@ -43,7 +43,7 @@ $this->title = 'My Yii Application';
             },
             getCategory(id = null) {
                 axios
-                    .get(`http://localhost:8080/index.php?r=site/getcategory&id=${id}`)
+                    .get(`http://localhost:8080/index.php?r=category/getcategory&id=${id}`)
                     .then(res => {
                         this.endReached = false;
                         let subCategories = res.data;

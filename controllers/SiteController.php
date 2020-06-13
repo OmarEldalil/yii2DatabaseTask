@@ -3,8 +3,7 @@
 namespace app\controllers;
 
 use app\models\Category;
-use tebazil\yii2seeder\Seeder;
-use Yii;
+
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -63,7 +62,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $categories = Category::find()->asArray()->orderBy('parent_id asc')->all();
+        return $this->render('index-v2',[
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -128,36 +130,5 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionGetcategory($id)
-    {
-        $whereExpression = ($id === 'null') ? 'is null' : "= {$id}";
 
-        $categories = Category::find()
-            ->where('parent_id ' . $whereExpression)
-            ->asArray()
-            ->all();
-        $results = json_encode($categories);
-        header("HTTP/1.1 200 OK");
-        header('Content-Type: application/json');
-        return $results;
-    }
-
-    public function actionSeed()
-    {
-        Yii::$app->db->
-        createCommand()->batchInsert('categories', ['name', 'parent_id'], [
-            ['category 1', null],
-            ['category 2', null],
-            ['category 3', null],
-            ['category 4', 1],
-            ['category 5', 2],
-            ['category 6', 2],
-            ['category 7', 3],
-            ['category 8', 5],
-            ['category 9', 7],
-            ['category 10', 4],
-            ['category 11', 1],
-        ])->execute();
-        return $this->redirect(['site/index']);
-    }
 }
